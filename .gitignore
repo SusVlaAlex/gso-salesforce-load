@@ -1,3 +1,5 @@
 # JetBrains IDE folders and files
 .idea
 out/
+target/
+*.iml
