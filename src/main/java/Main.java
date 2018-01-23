@@ -8,23 +8,25 @@ import org.slf4j.LoggerFactory;
 public class Main {
     public static void main(String[] args){
         Logger logger = LoggerFactory.getLogger(Main.class);
+        String syncObjectName=null;
+        String source=null;
+        String[] targets=null;
 
-        //Parsing the input arguments
-        CommandLineParser parser = new DefaultParser();
-        CommandLine cmd = null;
+        //Getting input arguments
         try {
-            cmd = parser.parse(setCmdOptions(),args);
+            CommandLineParser parser = new DefaultParser();
+            CommandLine cmd = parser.parse(setCmdOptions(),args);
+            //Initialize input values
+            syncObjectName = cmd.getOptionValue("object");
+            source = cmd.getOptionValue("source");
+            targets = cmd.getOptionValues("target");
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        String sfobject = cmd.getOptionValue("object");
-        String source = cmd.getOptionValue("source");
-        String[] targets = cmd.getOptionValues("target");
-
-        //Initializing and running the sync job.
-        logger.info("Loading SalesForce object '{}'.", sfobject);
-        DataObject obj = new DataObject(sfobject);
+        //Running the sync job.
+        logger.info("Loading SalesForce object '{}'.", syncObjectName);
+        DataObject obj = new DataObject(syncObjectName);
         for(String tgt: targets){
             logger.info("Adding the target {}", tgt);
             obj.addDestination(DataInstanceFactory.createDataInstance(tgt));

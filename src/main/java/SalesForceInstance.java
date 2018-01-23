@@ -138,5 +138,4 @@ public class SalesForceInstance implements DataInstance{
         soql = new StringBuilder(soql.substring(0, soql.length() - 2) + " from " + objectName);
         return soql.toString();
     }
-
 }
