@@ -2,7 +2,7 @@ version: 0.2
 env:
   variables:
     JAVA_HOME: "/usr/lib/jvm/java-8-openjdk-amd64"
-    M2_HOME: "/usr/share/maven"
+    M3_HOME: "/usr/share/maven"
 
 phases:
   install:
@@ -12,8 +12,7 @@ phases:
       - apt-get install -y maven
   pre_build:
     commands:
-      - command
-      - command
+      - unset M2_HOME
   build:
     commands:
       - echo Entered the build phase...
